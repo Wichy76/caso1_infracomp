@@ -2,7 +2,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Despachador implements Runnable{
-    
+
+        //Despacho de productos
+        private Despacho despacho;
+
+        public Despachador(Despacho despacho){
+            this.despacho=despacho;
+        }
 
     void metodoCualquiera(){
         ArrayList<Integer> list = new ArrayList<Integer>();
@@ -29,7 +35,9 @@ public class Despachador implements Runnable{
             else if (n >0){
                 int producto = App.bodega.get(0);
                 App.bodega.remove(0);
-                System.out.println("entregamos producto " +  String.valueOf(producto) );  
+                String producto2 =  String.valueOf(producto);
+                //System.out.println("entregamos producto " +  producto2);  
+                this.despacho.depositarProducto(producto2);
             }
             else {break;}
             }

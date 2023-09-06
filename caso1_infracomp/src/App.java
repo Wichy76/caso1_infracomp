@@ -13,7 +13,8 @@ public class App {
             bodega.add(i);
         }
 
-        Despachador despachador = new Despachador();
+        Despacho despacho=new Despacho(1);
+        Despachador despachador = new Despachador(despacho);
         Thread threadDespachador = new Thread(despachador);
         threadDespachador.start();
 
