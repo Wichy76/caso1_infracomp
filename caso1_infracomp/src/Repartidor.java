@@ -17,9 +17,9 @@ public class Repartidor extends Thread{
 
     //El tiempo que demora un repartidor en entregar un producto es un valor aleatorio en 3 y 10 segundos. 
     public void esperaAleatoria(int tiempoMaximo, int tiempoMinimo, String producto) {
-        System.out.println("El producto: " + producto + " se encuentra en REPARTO");
+        System.out.println("El producto " + producto + " se encuentra en REPARTO");
         int espera = (int) (Math.random() * (tiempoMaximo-tiempoMinimo))+tiempoMinimo; 
-        System.out.println("El repartidor R"+this.id+" entrega el producto en: " + espera + " segundos" );
+        System.out.println("El repartidor R"+this.id+" entrega el producto " + producto + " en: " + espera + " segundos" );
         try {
                     Thread.sleep(espera*1000);
               } catch (InterruptedException e) {
@@ -29,10 +29,10 @@ public class Repartidor extends Thread{
         
 
     public void run() {
-        while(!App.isFinnished() || this.despacho.hasMessages()){
+        while(!App.isFinished() || this.despacho.hasMessages()){
             String producto=this.despacho.retirarProducto();
             esperaAleatoria(TIEMPO_MAXIMO, TIEMPO_MINIMO, producto);
-            System.out.println("El repartidor R"+this.id+" entrego el producto: " + producto);
+            System.out.println("El producto " + producto + " fue ENTREGADO");
             
             
         }

@@ -36,7 +36,7 @@ public class Despachador implements Runnable{
                 int producto = App.bodega.get(0);
                 App.bodega.remove(0);
                 String producto2 =  String.valueOf(producto);
-                //System.out.println("entregamos producto " +  producto2);  
+                System.out.println("entregamos producto " +  producto2);  
                 this.despacho.depositarProducto(producto2);
             }
             else {break;}

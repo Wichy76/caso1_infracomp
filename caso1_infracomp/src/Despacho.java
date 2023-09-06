@@ -22,7 +22,7 @@ public class Despacho{
     //En ese caso el Despachador hace una espera pasiva.
     public synchronized void depositarProducto(String producto){
         while(this.despacho.size() == this.size){ //El producto anterior no ha sido recogido.
-            System.out.println("El despacho esta lleno, el despachador espera");
+            //System.out.println("El despacho esta lleno, el despachador espera");
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -31,7 +31,7 @@ public class Despacho{
         }
 
         this.despacho.add(producto); //Se pasa el producto al repartidor
-        System.out.println("El producto: " + producto + " se encuentra EN DESPACHO");
+        System.out.println("El producto " + producto + " se encuentra EN DESPACHO");
         notify(); //Notifica a los repartidores
     }
 
@@ -39,6 +39,7 @@ public class Despacho{
     //Si el despachador no tiene productos para entregar, esperan de manera pasiva a que sea su turno. 
     public synchronized String retirarProducto(){
         while(this.despacho.size() == 0){ //El despachador no tiene productos para entregar,
+            //System.out.println("El repartidor espera a que sea su turno");
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -47,7 +48,7 @@ public class Despacho{
         }
 
         String producto = this.despacho.remove(0);
-        System.out.println("El producto: " + producto + " fue DESPACHADO");
+        System.out.println("El producto " + producto + " fue DESPACHADO");
         notify();
 
         return producto;
