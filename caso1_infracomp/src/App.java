@@ -42,6 +42,39 @@ public class App {
         setFinished(true);
 
     }
+	public static synchronized int pedirProductores() {
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		while(true) {
+			System.out.print("Ingrese la cantidad de Productores: ");
+			String numeroString = null;
+			try {
+				numeroString = br.readLine();
+			} catch (IOException e) {
+
+				e.printStackTrace();
+			}
+			int cantidadProductores = Integer.parseInt(numeroString);
+			return cantidadProductores;
+		}
+	}
+
+    public static synchronized int pedirProductos() {
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		while(true) {
+			System.out.print("Ingrese la cantidad de Productos: ");
+			String numeroString = null;
+			try {
+				numeroString = br.readLine();
+			} catch (IOException e) {
+
+				e.printStackTrace();
+			}
+			int cantidadProductos = Integer.parseInt(numeroString);
+			return cantidadProductos;
+		}
+	}
 
 	public static synchronized int pedirRepartidores() {
 		
