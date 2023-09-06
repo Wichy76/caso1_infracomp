@@ -26,13 +26,20 @@ public class Repartidor extends Thread{
                     e.printStackTrace();
         } 
     }
+
+    public void entregarProducto(String producto){
+         System.out.println("El producto " + producto + " fue ENTREGADO");
+    }
         
 
     public void run() {
         while(!App.isFinished() || this.despacho.hasMessages()){
-            String producto=this.despacho.retirarProducto();
+            String producto=this.despacho.retirarProducto(id);
+            if(producto==null){
+                return;
+            }
             esperaAleatoria(TIEMPO_MAXIMO, TIEMPO_MINIMO, producto);
-            System.out.println("El producto " + producto + " fue ENTREGADO");
+            entregarProducto(producto);
             
             
         }

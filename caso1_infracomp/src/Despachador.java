@@ -40,9 +40,9 @@ public class Despachador implements Runnable{
                 this.despacho.depositarProducto(producto2);
             }
             else {break;}
-            }
         }
     }
+}
 
 
     
