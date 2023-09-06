@@ -27,7 +27,7 @@ public class App {
         Thread threadDespachador = new Thread(despachador);
 
         threadDespachador.start();
-        int m=5;
+        int m=8;
         for (int i= 0; i < m; i++)
         {
             Repartidor repartidor = new Repartidor(i, despacho);

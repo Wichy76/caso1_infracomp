@@ -49,7 +49,7 @@ public class Despacho{
 
         String producto = this.despacho.remove(0);
         System.out.println("El producto " + producto + " fue DESPACHADO por el repartidor R"+id);
-        notify();
+        notifyAll();
 
         return producto;
     }
