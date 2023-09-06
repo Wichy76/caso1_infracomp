@@ -39,7 +39,7 @@ public class Despacho{
     //Si el despachador no tiene productos para entregar, esperan de manera pasiva a que sea su turno. 
     public synchronized String retirarProducto(int id){
         while(this.despacho.size() == 0){ //El despachador no tiene productos para entregar,
-            System.out.println("El repartidor R"+ id +" espera a que sea su turno");
+            //System.out.println("El repartidor R"+ id +" espera a que sea su turno");
             try {
                 wait();
             } catch (InterruptedException e) {
