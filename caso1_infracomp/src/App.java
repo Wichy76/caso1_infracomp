@@ -1,97 +1,36 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
-public class App {
-
-    static public List<Integer> bodega = new ArrayList<Integer>();
-    private static volatile boolean finished = false;
-
-    public static boolean isFinished() {
-        return finished;
-    }
-
-    public static void setFinished(boolean finished) {
-        App.finished = finished;
-    }
-
-    public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
-        //int m=pedirRepartidores();
-
-        for (int i= 0; i < 3; i++)
-        {
-            bodega.add(i);
-        }
-
-        Despacho despacho=new Despacho(1);
-        Despachador despachador = new Despachador(despacho);
+public class App {    
+    public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Ingrese el numero de productores: ");
+		int N = sc.nextInt();
+		System.out.println("Ingrese el numero de repartidores: ");
+		int M = sc.nextInt();
+		System.out.println("Ingrese el tamaño de la bodega: ");
+		int TAM = sc.nextInt();
+		System.out.println("Ingrese el numero de productos a producir: ");
+		int P = sc.nextInt();
+		sc.close();
+		
+		Bodega bodega = new Bodega(TAM);
+        Despacho despacho = new Despacho(1);
+        Despachador despachador = new Despachador(despacho, bodega);
         Thread threadDespachador = new Thread(despachador);
-
+		
+		//lol
         threadDespachador.start();
-        int m=3;
-        for (int i= 0; i < m; i++)
+
+        for (int i= 0; i < M; i++)
         {
             Repartidor repartidor = new Repartidor(i, despacho);
             repartidor.start();
         }
+		for (int i = 0; i < N; i++) {
+			Productor productor = new Productor(bodega, P);
+			productor.start();
+		}
 
-
-        setFinished(true);
 
     }
-	public static synchronized int pedirProductores() {
-		
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		while(true) {
-			System.out.print("Ingrese la cantidad de Productores: ");
-			String numeroString = null;
-			try {
-				numeroString = br.readLine();
-			} catch (IOException e) {
-
-				e.printStackTrace();
-			}
-			int cantidadProductores = Integer.parseInt(numeroString);
-			return cantidadProductores;
-		}
-	}
-
-    public static synchronized int pedirProductos() {
-		
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		while(true) {
-			System.out.print("Ingrese la cantidad de Productos: ");
-			String numeroString = null;
-			try {
-				numeroString = br.readLine();
-			} catch (IOException e) {
-
-				e.printStackTrace();
-			}
-			int cantidadProductos = Integer.parseInt(numeroString);
-			return cantidadProductos;
-		}
-	}
-
-	public static synchronized int pedirRepartidores() {
-		
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		while(true) {
-			System.out.print("Ingrese la cantidad de Repartidores: ");
-			String numeroString = null;
-			try {
-				numeroString = br.readLine();
-			} catch (IOException e) {
-
-				e.printStackTrace();
-			}
-			int cantidadRepartidores = Integer.parseInt(numeroString);
-			return cantidadRepartidores;
-		}
-	}
-    
-
 }
