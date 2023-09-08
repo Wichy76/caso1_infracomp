@@ -11,6 +11,7 @@ public class Productor extends Thread{
 
     @Override
     public void run() {
-
+        bodega.depositar(1);
+        System.out.println("Se produjó el producto " +  1);
     }
 }
