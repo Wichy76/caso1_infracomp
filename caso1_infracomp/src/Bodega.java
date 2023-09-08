@@ -30,7 +30,4 @@ public class Bodega {
         return producto;
     }
 
-    public boolean isEmpty() {
-        return buff.isEmpty();
-    }
 }
