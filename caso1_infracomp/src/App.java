@@ -14,23 +14,23 @@ public class App {
 		sc.close();
 		
 		Bodega bodega = new Bodega(TAM);
+		
         Despacho despacho = new Despacho(1);
         Despachador despachador = new Despachador(despacho, bodega);
         Thread threadDespachador = new Thread(despachador);
 		
 		//lol
         threadDespachador.start();
-
+	
         for (int i= 0; i < M; i++)
         {
             Repartidor repartidor = new Repartidor(i, despacho);
             repartidor.start();
         }
+	
 		for (int i = 0; i < N; i++) {
-			Productor productor = new Productor(bodega, P);
+			Productor productor = new Productor(bodega, P, i);
 			productor.start();
 		}
-
-
     }
 }
