@@ -28,21 +28,19 @@ public class App {
 		int P = 1;
 
 		Bodega bodega = new Bodega(TAM);
-        Despacho despacho = new Despacho(1);
-        Despachador despachador = new Despachador(despacho, bodega);
+    Despacho despacho = new Despacho(1);
+    Despachador despachador = new Despachador(despacho, bodega);
 
-        despachador.start();
+    despachador.start();
 
-        for (int i= 0; i < M; i++)
-        {
-            Repartidor repartidor = new Repartidor(i, despacho);
-            repartidor.start();
-        }
+    for (int i= 0; i < M; i++)
+    {
+        Repartidor repartidor = new Repartidor(i, despacho);
+        repartidor.start();
+    }
 		for (int i = 0; i < N; i++) {
-			Productor productor = new Productor(bodega, P);
-			productor.start();
+			  Productor productor = new Productor(bodega, P, i);
+			  productor.start();
 		}
-
-
     }
 }

@@ -18,7 +18,7 @@ public class Bodega {
             }
         }
         buff.add(producto);
-        notifyAll();
+        System.out.println("Se depositó el producto " + producto + " en la bodega");
     }
 
     public synchronized int retirar() {
@@ -26,7 +26,8 @@ public class Bodega {
             return -1;
 
         int producto = buff.remove(0);
-        notifyAll();
+        notify();
+        System.out.println("Se retiró el producto " + producto + " de la bodega");
         return producto;
     }
 
