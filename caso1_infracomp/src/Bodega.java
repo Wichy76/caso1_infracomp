@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Bodega {
-    private ArrayList<Integer> buff;
-    private int n;
+    private final ArrayList<Integer> buff;
+    private final int n;
 
     public Bodega(int n) {
         this.n = n;
@@ -22,11 +22,15 @@ public class Bodega {
     }
 
     public synchronized int retirar() {
-        if (buff.isEmpty()) 
+        if (buff.isEmpty())
             return -1;
-        
+
         int producto = buff.remove(0);
         notifyAll();
         return producto;
+    }
+
+    public boolean isEmpty() {
+        return buff.isEmpty();
     }
 }

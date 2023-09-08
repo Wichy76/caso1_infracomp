@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Despachador implements Runnable{
+public class Despachador extends Thread{
 
     //Despacho de productos
     private Despacho despacho;
@@ -12,36 +12,39 @@ public class Despachador implements Runnable{
         this.bodega=bodega;
     }
 
-    void metodoCualquiera(){
+    void metodoCualquiera(int n){
         ArrayList<Integer> list = new ArrayList<Integer>();
         Random rand = new Random();
         for (int i = 0; i < 20; i++) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             int randomNum = rand.nextInt(100);
             list.add(randomNum);
         }
 
-        System.out.println("Despachador está ejecutando un método cualquiera.");
+
     
     }
 
     @Override
     public void run() {
-        
-        int n = 5;
+
+        int n = 0;
         
         while (true){
-            if (this.bodega.isEmpty() && n > 0){
-                metodoCualquiera();
-                n --;
+            if (this.bodega.isEmpty()){                    //Si no hay nada en bodega espera activa pero util
+                System.out.println("Despachador está ejecutando un método cualquiera por ver número " + n);
+                metodoCualquiera(n);
+                n++;
             }
-            else if (n >0){
-                int producto = this.bodega.get(0);
-                this.bodega.remove(0);
+            else{
+                int producto = this.bodega.retirar();     //Si hay algo intentamos pasar a un repartidor
                 String producto2 =  String.valueOf(producto);
-                System.out.println("entregamos producto " +  producto2);  
                 this.despacho.depositarProducto(producto2);
             }
-            else {break;}
         }
     }
 }
