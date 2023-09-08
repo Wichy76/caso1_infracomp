@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 public class Productor extends Thread{
     private Bodega bodega; //este es el buffer
