@@ -3,10 +3,12 @@ public class Despachador extends Thread{
     //Despacho de productos
     private final Despacho despacho;
     private final Bodega bodega;
+    private int p;
 
-    public Despachador(Despacho despacho, Bodega bodega){
+    public Despachador(Despacho despacho, Bodega bodega, int p){
         this.despacho=despacho;
         this.bodega=bodega;
+        this.p = p;
     }
 
     void metodoCualquiera(){
@@ -35,6 +37,9 @@ public class Despachador extends Thread{
                      //Si hay algo intentamos pasar a un repartidor
                 String producto2 =  String.valueOf(producto);
                 this.despacho.depositarProducto(producto2);
+                if(despacho.getProductosRecibidos() == p){
+                    despacho.setDespachoAbierto(false);
+                }
             }
         }
     }

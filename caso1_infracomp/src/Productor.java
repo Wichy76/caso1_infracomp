@@ -13,9 +13,11 @@ public class Productor extends Thread{
     }
 
     public synchronized void producir(){
+        
         p++;
+        int p2= p;
         System.out.println("Productor "+id+ " produjo: "+p);
-        bodega.depositar(p);
+        bodega.depositar(p2);
     }
 
     @Override
