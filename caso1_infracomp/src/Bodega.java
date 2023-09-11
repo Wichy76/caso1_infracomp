@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 
 public class Bodega {
-    private final ArrayList<Integer> buff;
+    private final ArrayList<Producto> buff;
     private final int n;
 
     public Bodega(int n) {
         this.n = n;
-        this.buff = new ArrayList<Integer>();
+        this.buff = new ArrayList<Producto>();
     }
 
-    public synchronized void depositar(int producto) {
+    public synchronized void depositar(Producto producto) {
         while (buff.size() == n) {
             try {
                 wait();
@@ -18,16 +18,15 @@ public class Bodega {
             }
         }
         buff.add(producto);
-        System.out.println("Se depositó el producto " + producto + " en la bodega");
+        System.out.println("Se depositó el producto " + producto.getId() + " en la bodega");
     }
 
-    public synchronized int retirar() {
+    public synchronized Producto retirar() {
         if (buff.isEmpty())
-            return -1;
-
-        int producto = buff.remove(0);
+            return null;
+        Producto producto = buff.remove(0);
+        System.out.println("Se retiró el producto " + producto.getId() + " de la bodega");
         notify();
-        System.out.println("Se retiró el producto " + producto + " de la bodega");
         return producto;
     }
 
