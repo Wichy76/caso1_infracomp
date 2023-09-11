@@ -8,22 +8,26 @@ public class Productor extends Thread{
     private int id; //identificador del productor
 
 
-    public Productor(Bodega bodega, int n, int id, Despachador despachador){
+    /**
+     * Constructor de la clase Productor
+     * @param bodega
+     * @param n
+     * @param id
+     */
+    public Productor(Bodega bodega, int n, int id){
         this.bodega=bodega;
         this.n=n;
         this.id=id+1;
     }
 
+    /**
+     * Metodo que produce un producto y lo deposita en la bodega
+     */
     public synchronized void producir(){
         p++;
         int p2 = p;
-        Producto producto;
         CyclicBarrier espera = new CyclicBarrier(2);
-        if(p2==n)
-            producto= new Producto(p2, true, espera);
-        else
-            producto= new Producto(p2, true, espera);
-       
+        Producto producto = new Producto(p2, espera);
         System.out.println("Productor "+id+ " produjo: "+producto.getId());
         bodega.depositar(producto);
         try {
@@ -33,6 +37,9 @@ public class Productor extends Thread{
         }
     }
 
+    /**
+     * Metodo que ejecuta el hilo
+     */
     @Override
     public void run() {
         while(n>p){
