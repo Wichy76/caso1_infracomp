@@ -55,7 +55,7 @@ public class Despacho{
         }
 
         this.despacho.add(producto); //Se pasa el producto al repartidor
-        System.out.println("El producto " + producto.getId() + " se guardó en el despacho");
+        System.out.println("El producto " + producto.getId() + " se encuentra EN DESPACHO");
         productosRecibidos+=1;
         notify(); //Notifica a los repartidores
     }
