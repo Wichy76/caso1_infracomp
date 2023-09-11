@@ -1,8 +1,14 @@
+import java.util.ArrayList;
+
+
 public class Despachador extends Thread{
 
     //Despacho de productos
     private final Despacho despacho;
     private final Bodega bodega;
+
+    private final ArrayList<Productor> productores = new ArrayList<Productor>();
+
     private int p;
 
     public Despachador(Despacho despacho, Bodega bodega, int p){
@@ -19,12 +25,26 @@ public class Despachador extends Thread{
         }
     }
 
+    public void addProductor(Productor productor) {
+        productores.add(productor);
+    }
+
+    public boolean hayProductores(){
+        boolean hay = false;
+        for (Productor productor: productores){
+            if (productor.isAlive()){
+                hay = true;
+            }
+        }
+        return  hay;
+    }
+
     @Override
     public void run() {
 
         int n = 0;
         
-        while (true){
+        while (hayProductores()){
             int producto = this.bodega.retirar();
 
             if (producto == -1){
@@ -42,6 +62,7 @@ public class Despachador extends Thread{
                 }
             }
         }
+        System.out.println("Despachador ha acabado");
     }
 }
 
