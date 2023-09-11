@@ -8,9 +8,32 @@ public class Despacho{
     //Capacidad del buffer
     private int size;
     
+    private int productosRecibidos;
+
+    private boolean despachoAbierto;
+
+    public boolean isDespachoAbierto() {
+        return despachoAbierto;
+    }
+
+    public void setDespachoAbierto(boolean despachoAbierto) {
+        this.despachoAbierto = despachoAbierto;
+    }
+
+    public int getProductosRecibidos() {
+        return productosRecibidos;
+    }
+
+    public void setProductosRecibidos(int productosRecibidos) {
+        this.productosRecibidos = productosRecibidos;
+    }
+
+
+
     public Despacho(int size){
         this.size = size;
         this.despacho = new LinkedList<String>();
+        despachoAbierto =  true;
     }
 
     public synchronized boolean hasMessages(){
@@ -32,6 +55,7 @@ public class Despacho{
 
         this.despacho.add(producto); //Se pasa el producto al repartidor
         System.out.println("El producto " + producto + " se encuentra EN DESPACHO");
+        productosRecibidos+=1;
         notify(); //Notifica a los repartidores
     }
 

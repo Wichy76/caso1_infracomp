@@ -33,7 +33,7 @@ public class Repartidor extends Thread{
         
 
     public void run() {
-        while(!App.isFinished() || this.despacho.hasMessages()){
+        while(despacho.isDespachoAbierto()|| this.despacho.hasMessages()){
             String producto=this.despacho.retirarProducto(id);
             if(producto==null){
                 return;
