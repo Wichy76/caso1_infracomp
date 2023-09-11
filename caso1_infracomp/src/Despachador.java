@@ -5,7 +5,7 @@ public class Despachador extends Thread{
     private final Despacho despacho;
     private final Bodega bodega;
 
-    private final int numProductores;
+    //private final int numProductores;
 
     private final int numProductos;
 
@@ -13,7 +13,7 @@ public class Despachador extends Thread{
     public Despachador(Despacho despacho, Bodega bodega, int numProductos, int numProductores){
         this.despacho=despacho;
         this.bodega=bodega;
-        this.numProductores = numProductores;
+        //this.numProductores = numProductores;
         this.numProductos = numProductos;
     }
 
@@ -31,18 +31,15 @@ public class Despachador extends Thread{
         int n = 0;
         
         while (true){
-            int producto = this.bodega.retirar();
+            Producto producto = this.bodega.retirar();
 
-            if (producto == -1){
+            if (producto == null){
                     //Si no hay nada en bodega espera activa pero util
-                System.out.println("Despachador está ejecutando un método cualquiera por ver número " + n);
                 metodoCualquiera();
                 n++;
-            }
-            else{
-                     //Si hay algo intentamos pasar a un repartidor
-                String producto2 =  String.valueOf(producto);
-                this.despacho.depositarProducto(producto2);
+            } else {
+                //Si hay algo intentamos pasar a un repartidor
+                this.despacho.depositarProducto(producto);
 
                 if(despacho.getProductosRecibidos() == numProductos){
                     //Si el número de productos despachados es igual al total de productos terminamos
