@@ -58,7 +58,7 @@ public class Despacho{
     //Si el despachador no tiene productos para entregar, esperan de manera pasiva a que sea su turno. 
     public synchronized Producto retirarProducto(int id){
         while(this.despacho.size() == 0){ //El despachador no tiene productos para entregar,
-            //System.out.println("El despacho esta abierto: "+despachoAbierto);
+            //System.out.println("El repartidor R"+id+" espera su turno");
 
             if(!despachoAbierto){
                 return null;

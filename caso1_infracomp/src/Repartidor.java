@@ -15,13 +15,14 @@ public class Repartidor extends Thread{
     }
 
     private synchronized void entregarProducto(Producto producto){
+        System.out.println("El producto " + producto.getId() + " se encuentra EN REPARTO"); 
         int espera = (int) (Math.random() * (TIEMPO_MAXIMO-TIEMPO_MINIMO))+TIEMPO_MINIMO; 
         try {
             Thread.sleep(espera*1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("El repartidor R"+this.id+" ENTREGA el producto " + producto.getId() + " en: " + espera + " segundos" );  
+        System.out.println("El repartidor R"+this.id+" ENTREGO el producto " + producto.getId() + " en: " + espera + " segundos" );  
         producto.despachar();
     }
         
