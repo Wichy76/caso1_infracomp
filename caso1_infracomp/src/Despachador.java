@@ -5,7 +5,7 @@ public class Despachador extends Thread{
     private final Despacho despacho;
     private final Bodega bodega;
 
-    private final int numProductores;
+    //private final int numProductores;
 
     private final int numProductos;
 
@@ -13,7 +13,7 @@ public class Despachador extends Thread{
     public Despachador(Despacho despacho, Bodega bodega, int numProductos, int numProductores){
         this.despacho=despacho;
         this.bodega=bodega;
-        this.numProductores = numProductores;
+        //this.numProductores = numProductores;
         this.numProductos = numProductos;
     }
 
@@ -41,7 +41,7 @@ public class Despachador extends Thread{
                 //Si hay algo intentamos pasar a un repartidor
                 this.despacho.depositarProducto(producto);
 
-                if(despacho.getProductosRecibidos() == numProductos*numProductores){
+                if(despacho.getProductosRecibidos() == numProductos){
                     //Si el número de productos despachados es igual al total de productos terminamos
 
                     despacho.setDespachoAbierto(false);
