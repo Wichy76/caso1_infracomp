@@ -1,14 +1,20 @@
+
 public class Despachador extends Thread{
 
     //Despacho de productos
     private final Despacho despacho;
     private final Bodega bodega;
-    private int p;
 
-    public Despachador(Despacho despacho, Bodega bodega, int p){
+    private final int numProductores;
+
+    private final int numProductos;
+
+
+    public Despachador(Despacho despacho, Bodega bodega, int numProductos, int numProductores){
         this.despacho=despacho;
         this.bodega=bodega;
-        this.p = p;
+        this.numProductores = numProductores;
+        this.numProductos = numProductos;
     }
 
     void metodoCualquiera(){
@@ -18,7 +24,7 @@ public class Despachador extends Thread{
             throw new RuntimeException(e);
         }
     }
-
+    
     @Override
     public void run() {
 
@@ -37,11 +43,18 @@ public class Despachador extends Thread{
                      //Si hay algo intentamos pasar a un repartidor
                 String producto2 =  String.valueOf(producto);
                 this.despacho.depositarProducto(producto2);
-                if(despacho.getProductosRecibidos() == p){
+
+                if(despacho.getProductosRecibidos() == numProductos*numProductores){
+                    //Si el número de productos despachados es igual al total de productos terminamos
+
                     despacho.setDespachoAbierto(false);
+
+                    System.out.println("Despachador ha acabado");
+                    break;
                 }
             }
         }
+
     }
 }
 
