@@ -44,7 +44,7 @@ public class Despachador extends Thread{
                 String producto2 =  String.valueOf(producto);
                 this.despacho.depositarProducto(producto2);
 
-                if(despacho.getProductosRecibidos() == numProductos*numProductores){
+                if(despacho.getProductosRecibidos() == numProductos){
                     //Si el número de productos despachados es igual al total de productos terminamos
 
                     despacho.setDespachoAbierto(false);
