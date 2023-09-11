@@ -9,7 +9,6 @@ public class Productor extends Thread{
         this.bodega=bodega;
         this.n=n;
         this.id=id;
-        despachador.addProductor(this);
     }
 
     public synchronized void producir(){
