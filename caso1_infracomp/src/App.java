@@ -21,10 +21,10 @@ public class App {
 
 		Bodega bodega = new Bodega(TAM);
 		Despacho despacho = new Despacho(1);
-		Despachador despachador = new Despachador(despacho, bodega, P, N);
+		Despachador despachador = new Despachador(despacho, bodega, P);
 
 		for (int i = 0; i < N; i++) {
-			Productor productor = new Productor(bodega, P, i, despachador);
+			Productor productor = new Productor(bodega, P, i);
 			productor.start();
 		}
 
